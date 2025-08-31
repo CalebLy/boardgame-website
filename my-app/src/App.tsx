@@ -10,6 +10,7 @@ import { Games } from "./pages/Games";
 import { Shop } from "./pages/Shop";
 import { Navbar } from "./components/Navbar";
 
+
 function App() {
 
   return (
