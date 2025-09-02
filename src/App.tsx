@@ -11,6 +11,8 @@ import { Shop } from "./pages/Shop";
 import { Navbar } from "./components/Navbar";
 import './index.css';
 import { Signup } from "./pages/Signup";
+import { LoginProvider } from "./pages/auth/LoginProvider";
+
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
   return (
     <div className="bg-background min-h-screen">
       <Router>
+        <LoginProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +30,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        </LoginProvider>
       </Router>
     </div>
   );

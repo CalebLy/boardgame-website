@@ -7,7 +7,8 @@ module.exports = {
     extend: {
         colors: {
             primary: "#20355A",
-            secondary: "#15243C",
+            secondary: "#253E6A",
+            buttonHover: "#15243C",
             background: "#3F5878",
         },
     },
