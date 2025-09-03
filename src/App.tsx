@@ -1,35 +1,28 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Leaderboard } from "./pages/Leaderboard";
-import { Login } from "./pages/auth/Login";
 import { Games } from "./pages/Games";
 import { Shop } from "./pages/Shop";
 import { Navbar } from "./components/Navbar";
-import './index.css';
-import { Signup } from "./pages/Signup";
-import { LoginProvider } from "./pages/auth/LoginProvider";
-
-
+import "./index.css";
+import { LoginProvider } from "./context/login/LoginProvider";
+import { LogIn } from "./pages/auth/Login";
+import { SignUp } from "./pages/auth/Signup";
 
 function App() {
-
   return (
     <div className="bg-background min-h-screen">
       <Router>
         <LoginProvider>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
+          </Routes>
         </LoginProvider>
       </Router>
     </div>

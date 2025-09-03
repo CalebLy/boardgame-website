@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLogin } from "../pages/auth/LoginProvider";
+import { useLogin } from "../context/login/LoginProvider";
+
 
 export const Navbar = () => {
   const context = useLogin();
   if (!context) return null;
-  const { session, signIn, signOut, errorMessage } = context;
+  const {
+    session,
+    signInGoogle,
+    signOut,
+    handleSignInPassword,
+    handleSignUpPassword,
+    errorMessage,
+  } = context;
 
   return (
     <>
@@ -44,14 +52,13 @@ export const Navbar = () => {
           </div>
           {/* Buttons on the right */}
           {!session ? (
-          
             <div className="absolute right-10 flex space-x-4">
               <Link
                 to="/login"
                 className="rounded-lg px-3 py-2 font-medium bg-secondary shadow-md transition duration-300 ease-in-out
                    hover:shadow-lg hover:shadow-white/20 hover:bg-buttonHover"
               >
-                Log in
+                Log In
               </Link>
               <Link
                 to="signup"
@@ -72,7 +79,7 @@ export const Navbar = () => {
               </button>
               <p className="text-red-500">{errorMessage}</p>
             </div>
-        )}
+          )}
         </div>
       </nav>
     </>

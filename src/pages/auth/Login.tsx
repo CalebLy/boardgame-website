@@ -1,36 +1,44 @@
+
 import "../../index.css";
-import { useLogin } from "./LoginProvider";
+import { useLogin } from "../../context/login/LoginProvider";
+import { AuthForm } from "../../components/AuthForm";
 
-
-
-export const Login = () => {
+export const LogIn = () => {
   const context = useLogin();
   if (!context) return null;
-  const { session, signIn, signOut, errorMessage } = context;
+  const {
+    session,
+    signInGoogle,
+    signOut,
+    handleSignInPassword,
+    handleSignUpPassword,
+    errorMessage,
+  } = context;
+
+
+
   return (
     <>
-      {!session ? (
-        // If there's no session → show sign-in button
-        <div className="flex justify-center space-x-6 py-4">
+      {!session && (
+        <div className="flex items-center justify-center min-h-screen bg-background">
+            <div className="bg-secondary py-8 px-10 rounded-xl shadow-lg w-full max-w-sm flex flex-col items-center space-y-4">
+          <AuthForm title="Log In" onSubmit={handleSignInPassword} errorMessage={errorMessage}/>
+
+          {/* Divider */}
+          <div className="flex items-center w-full">
+            <div className="flex-1 h-px bg-gray-400" />
+            <span className="px-4 text-gray-300 font-medium">Or</span>
+            <div className="flex-1 h-px bg-gray-400" />
+          </div>
+
+          {/* Google Sign-in */}
           <button
-            onClick={signIn}
-            className="rounded-lg px-3 py-2 text-white font-medium hover:bg-slate-100 hover:text-slate-900"
+            onClick={signInGoogle}
+            className="border rounded-lg px-8 py-2 text-white font-medium hover:bg-slate-100 hover:text-slate-900 transition w-full"
           >
             Sign In With Google
           </button>
-          <p className="text-red-500">{errorMessage}</p>
-        </div>
-      ) : (
-        // If there's a session → show welcome + sign-out
-        <div className="grid justify-center space-x-6 py-4 place-items-center  h-64 bg-gray-200">
-          <h2>Welcome, {session.user?.email}</h2>
-          <button
-            onClick={signOut}
-            className="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
-          >
-            Sign Out
-          </button>
-          <p className="text-red-500">{errorMessage}</p>
+          </div>
         </div>
       )}
     </>
