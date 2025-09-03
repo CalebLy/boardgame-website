@@ -20,10 +20,6 @@ export const SignUp = () => {
       <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="bg-secondary py-8 px-10 rounded-xl shadow-lg w-full max-w-sm flex flex-col items-center space-y-4">
           <AuthForm title="Sign Up" onSubmit={handleSignUpPassword} errorMessage={errorMessage} />
-          {/* Error message */}
-          {errorMessage && (
-            <p className="text-red-500 text-center w-full">{errorMessage}</p>
-          )}
         </div>
       </div>
     </>

@@ -1,9 +1,13 @@
 import { useState, useEffect, type ReactNode, useContext } from "react";
 import { supabase } from "../../lib/supabase.ts";
 import { LoginContext, type LoginContextProps } from "./LoginContext.tsx";
+import { useNavigate } from "react-router-dom";
 
 export const LoginProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<LoginContextProps["session"]>(null);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -18,7 +22,7 @@ export const LoginProvider = ({ children }: { children: ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -27,6 +31,7 @@ export const LoginProvider = ({ children }: { children: ReactNode }) => {
       setErrorMessage("Failed to sign out. Please try again.");
     } else {
       setErrorMessage(undefined);
+      navigate("./");
     }
   };
 
@@ -42,7 +47,7 @@ export const LoginProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // Sign in function
+
   const handleSignInPassword = async (data: {email: string, password: string}) => {
     const {email, password} = data;
     try {
@@ -53,9 +58,11 @@ export const LoginProvider = ({ children }: { children: ReactNode }) => {
 
       if (error) {
         console.error("Error Signing In:", error.message);
+        setErrorMessage("Error Signing In: " + error.message);
         return { success: false, message: error.message };
       }
 
+      navigate("./");
       return { success: true };
     } catch (err) {
       console.error("Unexpected error during sign-in:", err);
@@ -63,7 +70,7 @@ export const LoginProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // Sign up function
+
   const handleSignUpPassword = async (data: {email: string, password: string}) => {
     const {email, password} = data;
     try {
@@ -74,9 +81,11 @@ export const LoginProvider = ({ children }: { children: ReactNode }) => {
 
       if (error) {
         console.error("Error Signing Up:", error.message);
+        setErrorMessage("Error Signing Up: " + error.message);
         return { success: false, message: error.message };
       }
-
+      
+      navigate("./");
       return { success: true };
     } catch (err) {
       console.error("Unexpected error during sign-up:", err);

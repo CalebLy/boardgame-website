@@ -15,6 +15,8 @@ export const AuthForm = (props: AuthFormProp) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit({ email, password });
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -23,7 +25,7 @@ export const AuthForm = (props: AuthFormProp) => {
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col w-full space-y-4">
         {errorMessage && (
-          <p className="text-red-500 text-center w-full">{errorMessage}</p>
+          <p className="text-red-500 text-center w-full font-bold">{errorMessage}</p>
         )}
         <input
           type="text"
