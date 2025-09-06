@@ -8,8 +8,8 @@ import "./index.css";
 import { LoginProvider } from "./context/login/LoginProvider";
 import { LogIn } from "./pages/auth/Login";
 import { SignUp } from "./pages/auth/SignUp";
-import { Games } from "./pages/Games/Games";
-import { Tictactoe } from "./pages/Games/tictactoe/Tictactoe";
+import { Games } from "./pages/games/Games";
+import { TicTacToePage } from "./pages/games/tictactoe/Tictactoe";
 import { GameGrid } from "./components/GameGrid";
 
 function App() {
@@ -24,8 +24,8 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             // App.tsx
             <Route path="/games" element={<Games />}>
-              <Route index element={<GameGrid />} /> 
-              <Route path="tictactoe" element={<Tictactoe />} />
+              <Route index element={<GameGrid />} />
+              <Route path="tictactoe" element={<TicTacToePage />} />
             </Route>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LogIn />} />

@@ -1,3 +1,5 @@
-export const Tictactoe = () => {
-    return <div> TIC TAC TOE TEMP </div>
-}
+import { TicTacToe } from "../../../games/tictactoe/TicTacToe";
+
+export const TicTacToePage = () => {
+  return <TicTacToe />;
+};
